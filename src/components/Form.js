@@ -8,7 +8,7 @@ function Form() {
   };
 
   const addChild = (child) => {
-    setMain();
+    setMain([...main,{}]);
   };
   return (
     <>
