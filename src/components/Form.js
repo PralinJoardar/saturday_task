@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-// qwerty
 function Form() {
-  const [main, setMain] = useState([{ input: "", inputChild: [] }]);
-
+  const [main, setMain] = useState([
+    {
+      parentId: 1,
+      parentValue: "",
+      child: [],
+    },
+  ]);
+  console.log("main state: ", main)
+  let len = main.length;
   const addSibling = () => {
-    setMain([...main, { input: "", inputChild: [] }]);
+    setMain([...main, { parentId: len + 1, parentValue: "", child: [] }]);
   };
-
-  const addChild = (child) => {
-    setMain([...main,{}]);
+  const addChild = (index) => {
+    var currentChild = [...main];
+    currentChild[index].child.push("");
+    setMain(currentChild);
   };
   return (
     <>
@@ -19,28 +26,43 @@ function Form() {
       >
         + Add Sibling
       </button>
-      {main.map((value, key) => (
-        <div key={key} style={{ display: "inline-flex", paddingLeft: "20px" }}>
-          {console.log("value is", value)}
+      {main.map((parent, index) => (
+        <div
+          key={index}
+          style={{ display: "inline-flex", paddingLeft: "20px" }}
+        >
           <div>
-            <input type="text" />
+            <input
+              type="text"
+              onChange={(e) =>
+                setMain([...main], [(main[index].parentValue = e.target.value)])
+              }
+            />
             <br />
             <br />
             <div style={{ paddingLeft: "50px", display: "inline" }}>
-              {console.log("inputchild", value.inputChild)}
               <button
                 onClick={() => {
-                  addChild(value.inputChild);
+                  addChild(index);
                 }}
               >
                 + Add Child
               </button>
-            </div>
-            {value.inputChild.map((value,key)=>(
-                <div id={key}>
-                    <input type= "text" />
+              <br />
+              {parent.child.map((value, childKey) => (
+                <div key={childKey}>
+                  <br />
+                  <input
+                    onChange={(e) =>
+                      setMain(
+                        [...main],
+                        [(main[index].child[childKey] = e.target.value)]
+                      )
+                    }
+                  />
                 </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       ))}
