@@ -7,14 +7,17 @@ function Form() {
       child: [],
     },
   ]);
-  console.log("main state: ", main)
-  let len = main.length;
+  console.log("main state: ", main);
+  let parentLen = main.length;
+
   const addSibling = () => {
-    setMain([...main, { parentId: len + 1, parentValue: "", child: [] }]);
+    setMain([...main, { parentId: parentLen + 1, parentValue: "", child: [] }]);
   };
   const addChild = (index) => {
+    let childLen = main[index].child.length;
+    console.log("child length", childLen);
     var currentChild = [...main];
-    currentChild[index].child.push("");
+    currentChild[index].child.push({childId: childLen+1, childValue:""});
     setMain(currentChild);
   };
   return (
@@ -56,7 +59,7 @@ function Form() {
                     onChange={(e) =>
                       setMain(
                         [...main],
-                        [(main[index].child[childKey] = e.target.value)]
+                        [(main[index].child[childKey].childValue = e.target.value)]
                       )
                     }
                   />
