@@ -15,9 +15,9 @@ function Form() {
   };
   const addChild = (index) => {
     let childLen = main[index].child.length;
-    var currentChild = [...main];
-    currentChild[index].child.push({childId: childLen+1, childValue:""});
-    setMain(currentChild);
+    var currentMain = [...main];
+    currentMain[index].child.push({childId: childLen+1, childValue:""});
+    setMain(currentMain);
   };
   return (
     <>
@@ -37,7 +37,7 @@ function Form() {
             <input
               type="text"
               onChange={(e) =>
-                setMain([...main], [(main[index].parentValue = e.target.value)])
+               setMain([...main],[main[index].parentValue=e.target.value])
               }
             />
             <br />
