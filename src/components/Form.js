@@ -15,7 +15,6 @@ function Form() {
   };
   const addChild = (index) => {
     let childLen = main[index].child.length;
-    console.log("child length", childLen);
     var currentChild = [...main];
     currentChild[index].child.push({childId: childLen+1, childValue:""});
     setMain(currentChild);
