@@ -30,58 +30,83 @@ function Form() {
   };
   return (
     <>
-      <button
-        onClick={() => {
-          addSibling();
+      <div
+        style={{
+          display: "inline-flex",
+          flexDirection: "row",
+          overflow: "unset",
+          flexWrap: "unset",
         }}
       >
-        + Add Sibling
-      </button>
-      {main.map((parent, index) => (
-        <div
-          key={index}
-          style={{ display: "inline-flex", paddingLeft: "20px", }}
+        <button
+          onClick={() => {
+            addSibling();
+          }}
         >
-          <div>
-            <input
-              type="text"
-              onChange={(e) =>
-                setMain([...main], [(main[index].parentValue = e.target.value)])
-              }
-              value={parent.parentValue}
-            />
-            <br />
-            <br />
-            <div style={{ paddingLeft: "50px", display: "inline" }}>
-              <button
-                onClick={() => {
-                  addChild(index);
+          + Add Sibling
+        </button>
+        {main.map((parent, index) => (
+          <div
+            key={index}
+            style={{ display: "inline-flex", paddingLeft: "20px" }}
+          >
+            <div>
+              <input
+                type="text"
+                onChange={(e) =>
+                  setMain(
+                    [...main],
+                    [(main[index].parentValue = e.target.value)]
+                  )
+                }
+                value={parent.parentValue}
+                style={{
+                  display: "inline-flex",
+                  paddingLeft: "20px",
+                  flexDirection: "row",
+                  overflow: "unset",
+                  flexWrap: "unset",
+                }}
+              />
+              <br />
+              <br />
+              <div
+                style={{
+                  display: "inline-flex",
+                  paddingLeft: "20px",
+                  flexDirection: "row",
+                  overflow: "unset",
+                  flexWrap: "unset",
                 }}
               >
-                + Add Child
-              </button>
-              <br />
-              {parent.child.map((value, childKey) => (
-                <div key={childKey}>
-                  <br />
-                  <input
-                    onChange={(e) =>
-                      setMain(
-                        [...main],
-                        [
-                          (main[index].child[childKey].childValue =
-                            e.target.value),
-                        ]
-                      )
-                    }
-                    value={value.childValue}
-                  />
-                </div>
-              ))}
+                <button
+                  onClick={() => {
+                    addChild(index);
+                  }}
+                >
+                  + Add Child
+                </button>
+                {parent.child.map((value, childKey) => (
+                  <div key={childKey}>
+                    <input
+                      onChange={(e) =>
+                        setMain(
+                          [...main],
+                          [
+                            (main[index].child[childKey].childValue =
+                              e.target.value),
+                          ]
+                        )
+                      }
+                      value={value.childValue}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </>
   );
 }
