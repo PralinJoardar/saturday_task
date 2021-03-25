@@ -14,10 +14,19 @@ function Form() {
     setMain([...main, { parentId: parentLen + 1, parentValue: "", child: [] }]);
   };
   const addChild = (index) => {
-    let childLen = main[index].child.length;
-    var currentMain = [...main];
-    currentMain[index].child.push({childId: childLen+1, childValue:""});
-    setMain(currentMain);
+    setMain(
+      [...main],
+      [
+        main[index].child.push({
+          childLen: main[index].child.length + 1,
+          childValue: "",
+        }),
+      ]
+    );
+    // let childLen = main[index].child.length;
+    // var currentMain = [...main];
+    // currentMain[index].child.push({ childId: childLen + 1, childValue: "" });
+    // setMain(currentMain);
   };
   return (
     <>
@@ -31,14 +40,15 @@ function Form() {
       {main.map((parent, index) => (
         <div
           key={index}
-          style={{ display: "inline-flex", paddingLeft: "20px" }}
+          style={{ display: "inline-flex", paddingLeft: "20px", }}
         >
           <div>
             <input
               type="text"
               onChange={(e) =>
-               setMain([...main],[main[index].parentValue=e.target.value])
+                setMain([...main], [(main[index].parentValue = e.target.value)])
               }
+              value={parent.parentValue}
             />
             <br />
             <br />
@@ -58,9 +68,13 @@ function Form() {
                     onChange={(e) =>
                       setMain(
                         [...main],
-                        [(main[index].child[childKey].childValue = e.target.value)]
+                        [
+                          (main[index].child[childKey].childValue =
+                            e.target.value),
+                        ]
                       )
                     }
+                    value={value.childValue}
                   />
                 </div>
               ))}
