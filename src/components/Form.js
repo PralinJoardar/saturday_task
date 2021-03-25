@@ -17,7 +17,7 @@ function Form() {
     setMain(
       main.map((value, i) =>
         i == index
-          ? [...main, { childLen: main[i].child.length + 1, childValue: "" }]
+          ? [...main, {childLen: main[i].child.length + 1, childValue: "" }]
           : value
       )
     );
