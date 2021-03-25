@@ -15,14 +15,21 @@ function Form() {
   };
   const addChild = (index) => {
     setMain(
-      [...main],
-      [
-        main[index].child.push({
-          childLen: main[index].child.length + 1,
-          childValue: "",
-        }),
-      ]
+      main.map((value, i) =>
+        i == index
+          ? [...main, { childLen: main[i].child.length + 1, childValue: "" }]
+          : value
+      )
     );
+
+    // [...main],
+    // [
+    //   main[index].child.push({
+    //     childLen: main[index].child.length + 1,
+    //     childValue: "",
+    //   }),
+    // ]
+
     // let childLen = main[index].child.length;
     // var currentMain = [...main];
     // currentMain[index].child.push({ childId: childLen + 1, childValue: "" });
